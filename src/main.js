@@ -11,7 +11,18 @@ const main = () => {
 		window.devicePixelRatio
 	)
 
+	window.addEventListener('resize', () => {
+		world.setSize(
+			container.clientWidth,
+			container.clientHeight,
+			window.devicePixelRatio
+		)
+		world.render()
+	})
+
 	world.render()
+
+	
 }
 
 main()
