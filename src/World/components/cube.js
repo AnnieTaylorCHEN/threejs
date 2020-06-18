@@ -14,11 +14,17 @@ export const createCube = () => {
 
 	// create a Mesh containing the geometry and material
 	const cube = new Mesh(geometry, material)
+
+	const radiansPerSecond = MathUtils.degToRad(3.6)
+
 	cube.position.set(-0.5, -0.1, 1)
-	cube.scale.set(1.25, 0.25, 0.5)
-	cube.rotation.x = MathUtils.degToRad(-60)
-	cube.rotation.y = MathUtils.degToRad(-45)
-	cube.rotation.z = MathUtils.degToRad(60)
+	// cube.scale.set(1.25, 0.25, 0.5)
+
+	cube.tick = (delta) => {
+		cube.rotation.x += delta * radiansPerSecond
+		cube.rotation.y += delta * radiansPerSecond
+		cube.rotation.z += delta * radiansPerSecond
+	}
 
 	return cube
 }

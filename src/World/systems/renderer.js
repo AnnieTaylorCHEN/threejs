@@ -6,4 +6,3 @@ export const createRenderer = () => {
 
 	return renderer
 }
-

@@ -5,11 +5,15 @@ import { createLights } from './components/lights.js'
 
 import { createRenderer } from './systems/renderer.js'
 
+import { update } from './systems/update.js'
+
 // These variables are module-scoped: we cannot access them
 // from outside the module
 let camera
 let renderer
 let scene
+
+const updatables = []
 
 export class World {
 	constructor() {
@@ -19,9 +23,10 @@ export class World {
 
 		const cube = createCube()
 		const light = createLights()
+		updatables.push(cube)
 
-    scene.add(cube, light)
-    this.canvas = renderer.domElement
+		scene.add(cube, light)
+		this.canvas = renderer.domElement
 	}
 
 	render() {
@@ -40,5 +45,12 @@ export class World {
 
 		// set the pixel ratio (for mobile devices)
 		renderer.setPixelRatio(pixelRatio)
+	}
+
+	start() {
+		renderer.setAnimationLoop(() => {
+			update(updatables)
+			this.render()
+		})
 	}
 }

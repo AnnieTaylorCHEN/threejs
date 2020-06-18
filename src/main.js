@@ -20,7 +20,7 @@ const main = () => {
 		world.render()
 	})
 
-	world.render()
+	world.start()
 
 	
 }
