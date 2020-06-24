@@ -3,8 +3,8 @@ import { createCube } from './components/cube.js'
 import { createScene } from './components/scene.js'
 import { createLights } from './components/lights.js'
 
+import { createControls } from './systems/controls.js'
 import { createRenderer } from './systems/renderer.js'
-
 import { update } from './systems/update.js'
 
 // These variables are module-scoped: we cannot access them
@@ -21,9 +21,12 @@ export class World {
 		scene = createScene()
 		renderer = createRenderer()
 
+		const controls = createControls(camera, renderer.domElement)
+
 		const cube = createCube()
 		const light = createLights()
-		updatables.push(cube)
+		// updatables.push(cube)
+		updatables.push(controls)
 
 		scene.add(cube, light)
 		this.canvas = renderer.domElement
