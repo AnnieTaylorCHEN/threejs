@@ -1,11 +1,12 @@
 import { createCamera } from './components/camera.js'
-import { createCube } from './components/cube.js'
+import { createMeshGroup } from './components/meshGroup.js'
 import { createScene } from './components/scene.js'
 import { createLights } from './components/lights.js'
 
 import { createControls } from './systems/controls.js'
 import { createRenderer } from './systems/renderer.js'
 import { update } from './systems/update.js'
+
 
 // These variables are module-scoped: we cannot access them
 // from outside the module
@@ -23,12 +24,12 @@ export class World {
 
 		const controls = createControls(camera, renderer.domElement)
 
-		const cube = createCube()
-		const light = createLights()
+		const meshGroup = createMeshGroup()
+		const { ambientLight, mainLight, hemisphereLight} = createLights()
 		// updatables.push(cube)
-		updatables.push(controls)
+		updatables.push(controls, meshGroup)
 
-		scene.add(cube, light)
+		scene.add(mainLight, hemisphereLight, meshGroup)
 		this.canvas = renderer.domElement
 	}
 
