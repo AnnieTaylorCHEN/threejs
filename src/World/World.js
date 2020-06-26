@@ -1,7 +1,8 @@
 import { createCamera } from './components/camera.js'
-import { createMeshGroup } from './components/meshGroup.js'
+// import { createMeshGroup } from './components/meshGroup.js'
 import { createScene } from './components/scene.js'
 import { createLights } from './components/lights.js'
+import { Train } from './components/Train/Train.js'
 
 import { createControls } from './systems/controls.js'
 import { createRenderer } from './systems/renderer.js'
@@ -24,12 +25,12 @@ export class World {
 
 		const controls = createControls(camera, renderer.domElement)
 
-		const meshGroup = createMeshGroup()
-		const { ambientLight, mainLight, hemisphereLight} = createLights()
-		// updatables.push(cube)
-		updatables.push(controls, meshGroup)
+		const train = new Train()
 
-		scene.add(mainLight, hemisphereLight, meshGroup)
+		const { ambientLight, mainLight} = createLights()
+		updatables.push(controls)
+
+		scene.add(train, ambientLight, mainLight)
 		this.canvas = renderer.domElement
 	}
 
